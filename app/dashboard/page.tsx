@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { SESSION_COOKIE } from "@/lib/auth";
 import LogoutButton from "./LogoutButton";
+import CheckInCard from "./CheckInCard";
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -32,6 +33,8 @@ export default async function DashboardPage() {
         )}
 
         <LogoutButton />
+
+        <CheckInCard />
       </div>
     </main>
   );

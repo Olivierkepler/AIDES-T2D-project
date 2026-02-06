@@ -38,17 +38,30 @@ export async function POST(req: Request) {
     });
 
     const res = NextResponse.json({ ok: true });
+    // Use secure cookies in production (HTTPS) or when explicitly set
+    const isSecure = process.env.NODE_ENV === "production" || process.env.FORCE_SECURE_COOKIES === "true";
     res.cookies.set({
       name: SESSION_COOKIE,
       value: token,
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: isSecure,
       path: "/",
       expires: expiresAt,
     });
     return res;
-  } catch {
+  } catch (error: any) {
+    // Log error for debugging (remove in production if sensitive)
+    console.error("Login error:", error?.message || error);
+    
+    // Check if it's a database connection error
+    if (error?.code === "P1001" || error?.message?.includes("Can't reach database")) {
+      return NextResponse.json(
+        { ok: false, error: "Database connection failed. Please try again later." },
+        { status: 503 }
+      );
+    }
+    
     return NextResponse.json({ ok: false, error: "Login failed." }, { status: 400 });
   }
 }

@@ -42,8 +42,11 @@ model User {
   sessions      Session[]
   participant   Participant? @relation(fields: [participantId], references: [id], onDelete: Cascade)
 
-  // ✅ NEW: password reset tokens
+  // ✅ password reset tokens
   passwordResetTokens PasswordResetToken[]
+
+  // ✅ daily check-ins
+  checkIns     CheckIn[]
 }
 
 model PasswordResetToken {
@@ -68,4 +71,26 @@ model Session {
 
   @@index([userId])
   @@index([expiresAt])
+}
+
+model CheckIn {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Core ratings (0–10)
+  distress  Int
+  mood      Int      // pleasant ↔ unpleasant (your UI can display reversed)
+  energy    Int      // energized ↔ drained
+
+  // Context tags (tap all that fit)
+  tags      String[] // Postgres text[]
+
+  // Open-ended responses
+  reflection String? @db.VarChar(2000)
+  coping     String? @db.VarChar(2000)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
 }
