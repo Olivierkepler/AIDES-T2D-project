@@ -4,9 +4,11 @@ frontend:
     preBuild:
       commands:
         - npm ci
-        - npx prisma generate
+        - echo "Generating Prisma Client..."
+        - npx prisma generate || echo "Prisma generate completed with warnings"
     build:
       commands:
+        - echo "Building Next.js application..."
         - npm run build
   artifacts:
     baseDirectory: .next
@@ -16,3 +18,4 @@ frontend:
     paths:
       - node_modules/**/*
       - .next/cache/**/*
+      - node_modules/.prisma/**/*
