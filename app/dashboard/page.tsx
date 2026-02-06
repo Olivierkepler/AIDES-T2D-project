@@ -19,13 +19,13 @@ export default async function DashboardPage() {
 
   return (
     <main className="min-h-screen p-6">
-      <div className="mx-auto max-w-2xl rounded-2xl border bg-white p-6 shadow-sm">
-        <h1 className="text-2xl font-semibold">Dashboard</h1>
-        <p className="mt-2 text-slate-600">Logged in as: {session.user.email}</p>
+      <div className="mx-auto max-w-2xl rounded-2xl border bg-white p-6 shadow-sm text-black">
+        <h1 className="text-2xl font-semibold text-black">Dashboard</h1>
+        <p className="mt-2 text-slate-600 text-black">Logged in as: {session.user.email}</p>
         {(session.user as any).role === "ADMIN" && (
           <a
             href="/admin"
-            className="mt-4 inline-block rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+            className="mt-4 inline-block rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 text-black"
           >
             Go to Admin Page
           </a>

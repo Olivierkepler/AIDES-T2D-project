@@ -68,8 +68,8 @@ export default function UsersTable() {
 
   return (
     <div className="mt-6 overflow-x-auto">
-      <table className="w-full text-left text-sm">
-        <thead className="border-b text-slate-600">
+      <table className="w-full text-left text-sm text-black">
+        <thead className="border-b text-slate-600 text-black    ">
           <tr>
             <th className="py-2">Email</th>
             <th className="py-2">Study ID</th>

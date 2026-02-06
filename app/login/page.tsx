@@ -36,17 +36,17 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen p-6">
       <div className="mx-auto max-w-md rounded-2xl border bg-white p-6 shadow-sm">
-        <h1 className="text-2xl font-semibold">Log In</h1>
+        <h1 className="text-2xl font-semibold text-black">Log In</h1>
 
         <form className="mt-6 space-y-3" onSubmit={onSubmit}>
           <input
-            className="w-full rounded-xl border px-3 py-2"
+            className="w-full rounded-xl border px-3 py-2 text-black"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
-            className="w-full rounded-xl border px-3 py-2"
+            className="w-full rounded-xl border px-3 py-2 text-black"
             placeholder="Password"
             type="password"
             value={password}
@@ -55,17 +55,17 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {error ? <p className="text-sm text-red-600">{error}</p> : null}
+          {error ? <p className="text-sm text-red-600 text-black">{error}</p> : null}
 
           <button
             disabled={loading}
-            className="w-full rounded-xl bg-slate-900 px-4 py-2 text-white disabled:opacity-60"
+            className="w-full rounded-xl bg-slate-900 px-4 py-2 text-white disabled:opacity-60 text-black"
           >
             {loading ? "Signing in..." : "Log In"}
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-slate-600">
+        <p className="mt-4 text-sm text-slate-600 text-black">
           Need a Study ID?{" "}
           <a className="underline" href="/activate">
             Sign up 

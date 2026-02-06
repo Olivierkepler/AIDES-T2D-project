@@ -8,8 +8,8 @@ export default async function AdminInvitesPage() {
 
   return (
     <div className="rounded-2xl border bg-white p-6 shadow-sm">
-      <h2 className="text-lg font-semibold">Invite Keys (Study IDs)</h2>
-      <p className="mt-1 text-sm text-slate-600">Create and manage unused Study IDs.</p>
+      <h2 className="text-lg font-semibold text-black">Invite Keys (Study IDs)</h2>
+      <p className="mt-1 text-sm text-slate-600 text-black">Create and manage unused Study IDs.</p>
       <InvitesTable />
     </div>
   );
