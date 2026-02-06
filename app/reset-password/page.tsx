@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Lock, Loader2, ArrowRight } from "lucide-react";
 
@@ -8,7 +8,7 @@ function cn(...xs: Array<string | false | null | undefined>) {
   return xs.filter(Boolean).join(" ");
 }
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const router = useRouter();
   const sp = useSearchParams();
   const token = sp.get("token") ?? "";
@@ -57,23 +57,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#071a3a]">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#071a3a]/70 via-[#071a3a]/75 to-[#071a3a]/90" />
-        <div
-          className="absolute inset-0 opacity-[0.14]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px), linear-gradient(to right, rgba(255,255,255,0.18) 1px, transparent 1px)",
-            backgroundSize: "52px 52px",
-            backgroundPosition: "center",
-          }}
-        />
-        <div className="absolute -left-20 top-20 h-72 w-72 rounded-full bg-[#f2b01e]/20 blur-3xl" />
-        <div className="absolute -right-24 bottom-10 h-72 w-72 rounded-full bg-[#0b4db3]/20 blur-3xl" />
-      </div>
-
-      <div className="relative mx-auto flex min-h-screen max-w-6xl items-center justify-center p-6">
+    <div className="relative mx-auto flex min-h-screen max-w-6xl items-center justify-center p-6">
         <div className="w-full max-w-md">
           <div className="mb-6 text-center">
             <h1 className="text-3xl font-semibold tracking-tight text-white">Reset password</h1>
@@ -174,6 +158,45 @@ export default function ResetPasswordPage() {
           </div>
         </div>
       </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-[#071a3a]">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#071a3a]/70 via-[#071a3a]/75 to-[#071a3a]/90" />
+        <div
+          className="absolute inset-0 opacity-[0.14]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px), linear-gradient(to right, rgba(255,255,255,0.18) 1px, transparent 1px)",
+            backgroundSize: "52px 52px",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute -left-20 top-20 h-72 w-72 rounded-full bg-[#f2b01e]/20 blur-3xl" />
+        <div className="absolute -right-24 bottom-10 h-72 w-72 rounded-full bg-[#0b4db3]/20 blur-3xl" />
+      </div>
+
+      <Suspense
+        fallback={
+          <div className="relative mx-auto flex min-h-screen max-w-6xl items-center justify-center p-6">
+            <div className="w-full max-w-md">
+              <div className="rounded-3xl bg-white/[0.08] p-6 shadow-2xl ring-1 ring-white/15 backdrop-blur-xl">
+                <div className="mb-5 h-1 w-16 rounded-full bg-[#f2b01e]" />
+                <div className="space-y-4">
+                  <div className="h-4 w-3/4 animate-pulse rounded bg-white/10" />
+                  <div className="h-10 w-full animate-pulse rounded-2xl bg-white/10" />
+                  <div className="h-10 w-full animate-pulse rounded-2xl bg-white/10" />
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      >
+        <ResetPasswordForm />
+      </Suspense>
     </main>
   );
 }
